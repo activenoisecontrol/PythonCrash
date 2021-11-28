@@ -1,0 +1,16 @@
+users = {
+    'aeinstein': {
+        'first': 'albert',
+        'second': 'einstain',
+        'location': 'princeton'
+            },
+    'mcurie': {
+        'first': 'marie',
+        'second': 'curie',
+        'location': 'paris'
+            }
+    }
+for uname, uinfo in users.items():
+    print(f'Username: {uname}')
+    print(f"\tFull name: {uinfo['first'].title()} {uinfo['second'].title()}")
+    print(f"\tLocation: {uinfo['location'].title()}")

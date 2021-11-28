@@ -1,0 +1,6 @@
+print('''Введите ваш возраст, чтобы узнать стоимость билета.
+Введите quit чтобы выйти.''')
+tr = True
+age = input(">>>")
+while tr:
+    print(f'Oh myyyyyyyyyyyyyyyYYYYY {age} YRS OLD')
