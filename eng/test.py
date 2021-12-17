@@ -26,14 +26,14 @@ def choose_word(i_wo, i_tr, words, words_list):
         chosen_word = choice(words_list)
         word = chosen_word[i_wo]
         translate = chosen_word[i_tr]
-        exit = test(word, translate, words, words_list)
+        exit = test(word, translate)
         if exit == 'exit':
             break
         else:
             print("You're right!")
         
 
-def test(word, translate, words, words_list):
+def test(word, translate):
     """Compare user's input with translate value."""
     print(f">>> {word}")
     user_translate = ''
@@ -53,7 +53,7 @@ def save(words):
         json.dump(words, file)
         return 
 
-def write_words(words, words_list):
+def write_words(words):
     """Input new words."""
     print("Input 'save' when ready")
     while True:
@@ -95,7 +95,7 @@ def main_menu():
         if initialize == '3':
             pass
         elif initialize == '2':
-            write_words(words, words_list)
+            write_words(words)
         elif initialize == '1':
             lang_page(words, words_list)
         else:
@@ -156,10 +156,3 @@ try:
         main_menu()
 except FileNotFoundError:
     newbee()
-
-
-
-
-
-
-
