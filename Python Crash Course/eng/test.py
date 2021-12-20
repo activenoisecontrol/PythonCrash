@@ -2,7 +2,7 @@ import os
 from random import choice
 import json
 
-def lang_page(words, words_list):
+def lang_page(words_list):
     """Page to choose language"""
     lang = ''
     while lang.lower().strip() != 'eng' and lang.lower().strip() != 'rus':
@@ -18,9 +18,9 @@ def lang_page(words, words_list):
         elif lang =='rus':
             i_wo = 1
             i_tr = 0
-    choose_word(i_wo, i_tr, words, words_list)
+    choose_word(i_wo, i_tr, words_list)
 
-def choose_word(i_wo, i_tr, words, words_list):
+def choose_word(i_wo, i_tr, words_list):
     """Choose random word from a list."""
     while True:
         chosen_word = choice(words_list)
@@ -79,7 +79,6 @@ def write_words(words):
             save(words)
         else:
             words.update({new_word: new_trans})
-            print(words)
 
 def main_menu():
     """Main menu."""
@@ -97,7 +96,7 @@ def main_menu():
         elif initialize == '2':
             write_words(words)
         elif initialize == '1':
-            lang_page(words, words_list)
+            lang_page(words_list)
         else:
             print("Please, input 1, 2 or 3")
             continue
@@ -123,6 +122,7 @@ def newbee():
         elif new_word == 'save':
             if words != {}:
                 save(words)
+                continue
             else:
                 print("First you need to input something.")
                 continue
@@ -149,7 +149,6 @@ def newbee():
                 continue
         else:
             words.update({new_word: new_trans})
-            print(words)
 
 try:
     with open('words.json', encoding='ascii') as file:
