@@ -5,8 +5,8 @@ import json
 def lang_page(words_list):
     """Page to choose language"""
     lang = ''
-    while lang.lower().strip() != 'eng' and lang.lower().strip() != 'rus':
-        lang = input(f"Выберите язык (eng/rus): ")
+    while lang != 'eng' and lang != 'rus':
+        lang = input(f"Выберите язык (eng/rus): ").lower().strip()
         if lang == 'menu':
             main_menu()
             break
@@ -37,14 +37,14 @@ def test(word, translate):
     """Compare user's input with translate value."""
     print(f">>> {word}")
     user_translate = ''
-    while user_translate.lower().strip() != translate:
-        user_translate = input(">>> ")
+    while user_translate != translate:
+        user_translate = input(">>> ").lower().strip()
         if user_translate == 'menu':
             main_menu()
             return 'exit'
         elif user_translate == 'exit':
             return 'exit'
-        elif user_translate.lower().strip() != translate:
+        elif user_translate != translate:
             print("You're wrong. Input again")
 
 def save(words):
