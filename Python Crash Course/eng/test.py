@@ -5,33 +5,46 @@ import json
 def lang_page(words_list):
     """Page to choose language"""
     lang = ''
-    while lang != 'eng' and lang != 'rus':
+    while lang != 'eng' and lang != 'rus' and lang != 'menu' and lang != 'exit':
         lang = input(f"Выберите язык (eng/rus): ").lower().strip()
-        if lang == 'menu':
-            main_menu()
-            break
-        elif lang == 'exit':
-            break
-        elif lang == 'eng':
+    if lang == 'menu':
+        main_menu()
+        return
+    elif lang == 'exit':
+        return
+    elif lang == 'eng' or lang == 'rus':
+        if lang == 'eng':
             i_wo = 0
             i_tr = 1
         elif lang =='rus':
             i_wo = 1
             i_tr = 0
-    choose_word(i_wo, i_tr, words_list)
+        choose_word(i_wo, i_tr, words_list)
 
 def choose_word(i_wo, i_tr, words_list):
     """Choose random word from a list."""
+    answered = []
     while True:
+        if len(answered) == len(words_list):
+            print("Cool! You're done.")
+            ack = ''
+            while ack != 'yes' and ack != 'no':
+                ack = input("Do you wanna test again? (yes/no)\n> ").lower().strip()
+            if ack == 'yes':
+                answered = []
+                continue
+            break
         chosen_word = choice(words_list)
         word = chosen_word[i_wo]
+        if word in answered:
+            continue
+        answered.append(word)
         translate = chosen_word[i_tr]
         exit = test(word, translate)
         if exit == 'exit':
             break
         else:
             print("You're right!")
-        
 
 def test(word, translate):
     """Compare user's input with translate value."""
@@ -49,9 +62,11 @@ def test(word, translate):
 
 def save(words):
     """Save words in file."""
+    print("Saving...")
     with open('words.json','w', encoding='ascii') as file:
         json.dump(words, file)
-        return 
+    print("Done!")    
+    return 
 
 def write_words(words):
     """Input new words."""
@@ -150,8 +165,13 @@ def newbee():
         else:
             words.update({new_word: new_trans})
 
-try:
-    with open('words.json', encoding='ascii') as file:
-        main_menu()
-except FileNotFoundError:
-    newbee()
+if __name__ == '__main__':
+
+    dirname = os.path.dirname(__file__)
+    os.chdir(dirname)
+
+    try:
+        with open('words.json', encoding='ascii') as file:
+            main_menu()
+    except FileNotFoundError:
+        newbee()
